@@ -354,3 +354,19 @@ b8088c305a52: Pushed
 c5ff2d88f679: Mounted from library/ubuntu
 latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb8221b1d88 size: 1157
 ```
+### to delete
+
+1. to remove containers
+
+   ```console
+   $ docker ps            # shows running containers
+   $ docker ps -a         # shows stopped containers
+   $ docker rm container-id
+   ```
+
+2. to remove Images
+
+   ```console
+   $ docker images         # it displays images
+   $ docker rmi image-id
+   ```
