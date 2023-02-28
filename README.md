@@ -370,3 +370,51 @@ latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb82
    $ docker images         # it displays images
    $ docker rmi image-id
    ```
+
+### Docker port mapping
+
+1. run the below command
+
+   ```command
+   $ docker run -p 8000:8000 it image-id
+   ```
+
+### Docker Multi Stage
+
+1. if we had a python application to run we use ubuntu and install python using it. But for python application to run it doesn't require any ubuntu apt packages and some other things. Thus increases the size of Docker. to Decrease the size we are going to use Docker Multi Stage.
+2. With multi-stage builds, you use multiple FROM statements in your Dockerfile. Each FROM instruction can use a different base, and each of them begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image.
+3. `Distroless` is a very minimalistic Image .
+
+### Docker Volumes and Bind Mounts
+
+1. commands
+
+  ```console
+  $ docker volume ls       # to list the volumes
+  $ docker volume create volume_Name    # it creates a volume with name volume_Name
+  $ docker volume inspect volume_Name   # you will get the details of volume 
+  $ docker volume rm volume_Name        # it deletes the volume
+  $ docker run -d --mount source=volume_Name,target=/app Image_name  # volume is attached to an container
+  $ docker inspect container_id        # to check volume is attached or not
+  ```
+
+### Docker Networking
+
+* Bridge Network
+* Host Networking
+* overlay Networking
+
+  ```console
+  $ apt-get install iputils-ping -y     # it installs ping
+  $ ping -v
+  $ docker inspect container_id         # to get the ip address of container
+  $ docker exec -it container_name /bin/bash    # to login to a container
+  $ ping ip_of_other_container          # run this command by login into one of the container (out of box Bridge network)
+  $ docker network ls                   # to list the networks on the host
+  $ docker network rm network_name      # it removes the network
+  $ docker network create secure-network  # it creates secure bridge network
+  $ docker run -d --name finance --network=secure-network nginx:latest   # it creates a nginx container with name finance that has custom network secure-network that we created earlier. if any other container tries to ping the finance container it fails. 
+  $ docker inspect finance                # to check the network
+  $ docker run -d --name host-demo --network=host nginx:latest      # we are using host network
+  $ docker inspect host-demo           # you can see no ip address is shown for the container, because we are using host network , so it is binded with host network. you can access container with the host ip itself.
+  ```
