@@ -329,6 +329,7 @@ hello-world                        latest    feb5d9fea6a5   16 months ago    13.
 
 ```console
 docker run -it raviteja18/my-first-docker-image
+docker run -p 3000:3000 my-image
 ```
 
 Output
@@ -362,6 +363,7 @@ latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb82
    $ docker ps            # shows running containers
    $ docker ps -a         # shows stopped containers
    $ docker rm container-id
+   $ docker rm -f $(docker ps -aq)     # to remove all the stopped containers
    ```
 
 2. to remove Images
@@ -369,6 +371,7 @@ latest: digest: sha256:6e49841ad9e720a7baedcd41f9b666fcd7b583151d0763fe78101bb82
    ```console
    $ docker images         # it displays images
    $ docker rmi image-id
+   $ docker rmi $(docker images -q)
    ```
 
 ### Docker port mapping
